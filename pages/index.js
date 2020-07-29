@@ -47,7 +47,8 @@ export default function Home({ allPostsData, data }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("https://vercel.com/lamagnere-1/nextjs-blog/api/daily");
+  // const res = await fetch("http://localhost:3000/api/daily");
+  const res = await fetch(process.env.VERCEL_URL+"/api/daily");
   const json = await res.json();
   const allPostsData = getSortedPostsData()
   return {

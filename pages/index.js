@@ -47,7 +47,7 @@ export default function Home({ allPostsData, data }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/daily");
+  const res = await fetch("https://localhost:8080/api/daily");
   const json = await res.json();
   const allPostsData = getSortedPostsData()
   return {

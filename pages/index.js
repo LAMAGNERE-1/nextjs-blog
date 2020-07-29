@@ -49,7 +49,7 @@ export default function Home({ allPostsData, data }) {
 
 export async function getStaticProps() {
   // const res = await fetch("http://localhost:3000/api/daily");
-  const { origin } = absoluteUrl(req);
+  const { origin } = absoluteUrl();
   const apiURL = `${origin}/api/job.js`
   const res = await fetch(apiURL);
   const json = await res.json();

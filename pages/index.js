@@ -48,7 +48,8 @@ export default function Home({ allPostsData, data }) {
 
 export async function getStaticProps() {
   // const res = await fetch("http://localhost:3000/api/daily");
-  const res = await fetch(process.env.VERCEL_URL+"/api/daily");
+  const url = process.env.VERCEL_URL
+  const res = await fetch(url);
   const json = await res.json();
   const allPostsData = getSortedPostsData()
   return {

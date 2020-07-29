@@ -4,6 +4,7 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import fetch from 'node-fetch'
+import absoluteUrl from 'next-absolute-url'
 
 
 export default function Home({ allPostsData, data }) {
@@ -48,8 +49,9 @@ export default function Home({ allPostsData, data }) {
 
 export async function getStaticProps() {
   // const res = await fetch("http://localhost:3000/api/daily");
-  const url = process.env.VERCEL_URL
-  const res = await fetch(url);
+  const { origin } = absoluteUrl(req);
+  const apiURL = `${origin}/api/job.js`
+  const res = await fetch(apiURL);
   const json = await res.json();
   const allPostsData = getSortedPostsData()
   return {

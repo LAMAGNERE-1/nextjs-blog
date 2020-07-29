@@ -3,9 +3,10 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
-import Date from '../components/date'
+import fetch from 'isomorphic-unfetch'
 
-export default function Home({ allPostsData }) {
+
+export default function Home({ allPostsData, data }) {
   return (
     <Layout home>
       <Head>
@@ -16,6 +17,13 @@ export default function Home({ allPostsData }) {
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+        </p>
+        <p>
+        _id:{data._id}, 
+        <br />
+        nom: {data.nom}, 
+        <br />
+        prenom: {data.prenom}
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -39,10 +47,14 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/daily");
+  const json = await res.json();
   const allPostsData = getSortedPostsData()
   return {
     props: {
+      data: json,
       allPostsData
-    }
-  }
+    },
+  };
 }
+
